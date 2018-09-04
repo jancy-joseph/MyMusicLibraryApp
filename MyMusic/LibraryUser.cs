@@ -11,6 +11,7 @@ namespace MyMusic
     /// </summary>
     class LibraryUser
     {
+        private const string LOGIN_FILE_NAME = "LoginConfig.txt";
         /// <summary>
         /// User ID of the Music Library
         /// </summary>
@@ -19,22 +20,60 @@ namespace MyMusic
         /// <summary>
         /// Hold the List of Music playlists of the Playlists class
         /// </summary>
-     
-       // public MusicPlaylist[] UserPlaylist { get; set; }
-       
-        public static  LibraryUser GetLibraryUser()
+
+        // public MusicPlaylist[] UserPlaylist { get; set; }
+        //public List<UserPlaylist> LibUsersList = new List<UserPlaylist>();
+        public static async Task<ICollection<UserPlaylist>> GetMyPlaylist()
         {
-            var libuser = new LibraryUser()
-            {
-                UserName = "Jancy",
-                USerPassword = "Jan!23"
-            };
-            return libuser;
+
         }
-         public static void WriteLibraryUser(LibraryUser myUser)
+        public static  async Task<ICollection<LibraryUser>> GetLibraryUsers()
         {
-            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}";
-             FileHelper.WriteTextFileAsync("LoginConfig.txt", LibUserData);
+            var LibUsersList = new List<LibraryUser>();
+            var filecontent = await FileHelper.ReadTextFileAsync(LOGIN_FILE_NAME);
+            var lines = filecontent.Split(new char[] { '\r', '\n' });
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrEmpty(line))
+                    continue;
+                var lineParts = line.Split(',');
+                var LibUser = new LibraryUser()
+                {
+                    UserName = lineParts[0],
+                    USerPassword = lineParts[1]
+                };
+                LibUsersList.Add(LibUser);
+            }
+            return LibUsersList;
+        }
+         public static void WriteLibraryUserToFile(LibraryUser myUser)
+        {
+            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}\n";
+             FileHelper.WriteTextFileAsync(LOGIN_FILE_NAME, LibUserData);
+        }
+        public static  async Task<bool> ValidateLibraryUser(LibraryUser myUser)
+        {
+            
+            var filecontent = await FileHelper.ReadTextFileAsync(LOGIN_FILE_NAME);
+            var lines = filecontent.Split(new char[] { '\r', '\n' });
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrEmpty(line))
+                    continue;
+                var lineParts = line.Split(',');
+                var LibUser = new LibraryUser()
+                {
+                    UserName = lineParts[0],
+                    USerPassword = lineParts[1]
+                };
+                // Checking if the user object is in the Stored Login config file.
+                if(LibUser.Equals(myUser))
+                {
+                    return true;
+                }
+            }
+            return false;
+
         }
         
     }

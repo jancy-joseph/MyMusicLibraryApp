@@ -19,5 +19,17 @@ namespace MyMusic
             textWriter.WriteString(content);
             await textWriter.StoreAsync();
         }
+        public static async Task<string> ReadTextFileAsync(string FileName)
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var textFile = await localFolder.GetFileAsync(FileName);
+            var textStream = await textFile.OpenReadAsync();
+            var textReader = new DataReader(textStream);
+            var textLength = textStream.Size;
+            await textReader.LoadAsync((uint)textLength);
+            return textReader.ReadString((uint)textLength);
+
+
+        }
     }
 }

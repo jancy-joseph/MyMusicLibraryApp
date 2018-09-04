@@ -39,7 +39,8 @@ namespace MyMusic
                 UserName = UserNametxt.Text,
                 USerPassword = Passwordtxt.Password
             };
-            LibraryUser.WriteLibraryUser(myUser);
+            LibraryUser.WriteLibraryUserToFile(myUser);
+            this.Frame.Navigate(typeof(MainPage));
         }
 
         private void Passwordtxt_PasswordChanged(object sender, RoutedEventArgs e)

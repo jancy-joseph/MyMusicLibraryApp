@@ -25,24 +25,40 @@ namespace MyMusic
         public MainPage()
         {
             this.InitializeComponent();
-            DataContext = LibraryUser.GetLibraryUser();
         }
 
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            DataContext = await LibraryUser.GetLibraryUsers();
+        }
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
              this.Frame.Navigate(typeof(AddUser));
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private  async void Login_Click(object sender, RoutedEventArgs e)
         {
-
+            var myUser = new LibraryUser()
+            {
+                UserName = txtUserName.Text,
+                USerPassword = txtPassword.Password
+            };
+            if(await LibraryUser.ValidateLibraryUser(myUser))
+            {
+                this.Frame.Navigate(typeof(MyMusicCollection));
+            }
+            else
+            {
+                MainStatusText.Text = @" This login account doesnot exist.Enter a different account or create a new user";
+            }
         }
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (txtPassword.Password == "Password")
             {
-                MainStatusText.Text = "'Password' is not allowed as a password.";
+                MainStatusText.Text = @"'Password' is not allowed as a password.";
             }
             else
             {
