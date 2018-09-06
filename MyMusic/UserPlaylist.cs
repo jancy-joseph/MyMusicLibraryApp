@@ -11,19 +11,19 @@ namespace MyMusic
         public string playlistName { get; set; }
         public string playlistUserName { get;set }
 
-        public static LoadMyMusic()
+        public void LoadMyMusic()
         {
 
         }
-        public static AddSongToPlaylistTOcheckbox()
+        public void AddSongToPlaylistTOcheckbox()
         {
 
         }
-        public static DeleteSongsFromPlaylist()
+        public void DeleteSongsFromPlaylist()
         {
 
         }
-        public static PlayMyMusic()
+        public void PlayMyMusic()
         {
 
         }

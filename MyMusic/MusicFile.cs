@@ -29,12 +29,29 @@ namespace MyMusic
         public uint Year { get; set; }
 
     */
-
+    /// <summary>
+    /// Source of the file to play using Mediaplayer
+    /// </summary>
         public StorageFile MFile { get; set; }
+        /// <summary>
+        /// Name of the File to be played
+        /// </summary>
         public string MFileName { get; set; }
+        /// <summary>
+        /// Adding a cover Image property
+        /// </summary>
         public string McoverImage { get; set; } = "Assets/cd-654603_1280.png";
+        /// <summary>
+        /// Name of the Albumn
+        /// </summary>
         public string MAlbum { get; set; }
+        /// <summary>
+        /// Name of the  Artist
+        /// </summary>
         public string MArtist { get; set; }
+        /// <summary>
+        /// Title of the SOng
+        /// </summary>
         public string MTitle { get; set; }
 
     }

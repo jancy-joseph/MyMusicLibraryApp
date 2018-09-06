@@ -21,6 +21,8 @@ using System.Diagnostics;
 using System.Text;
 using Windows.Media.Playlists;
 using Windows.Storage.FileProperties;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,8 +46,10 @@ namespace MyMusic
         }
         public async void LoadMyFullCollection()
         {
-            var MusicFileList = new List<MusicFile>();
-            //var jObj = new JsonObject();
+            Dictionary<string, MusicFile> MyMusicDictLst = new Dictionary<string, MusicFile>();
+   
+            var MusicJsonObj= new JsonObject();
+            
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
             picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
             picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.MusicLibrary;
@@ -74,15 +78,38 @@ namespace MyMusic
                         MFile = fileToAdd,
                         MAlbum = musicProperties.Album,
                         MArtist = musicProperties.Artist,
-                        MTitle= musicProperties.Title
-
+                        MTitle = musicProperties.Title
                     };
+                 //   MyMusicDictLst.Add(mymusic.MFileName, mymusic);
                     MusicFileList.Add(mymusic);
-                   //this.ChoosePlaylist1.Items.Add(fileToAdd.Path);
+                    //string output = JsonConvert.SerializeObject(mymusic);
+
+                    // jObj.Add();
+                    //this.ChoosePlaylist1.Items.Add(fileToAdd.Path);
                     // output.Append(file.Name + "\n");
                 }
+               
+
+                /*
+                foreach ( KeyValuePair<string, MusicFile> Music in MyMusicDictLst)
+                {
+                    Console.WriteLine("Music List");
+                    Console.WriteLine("Key = {0}, Value = {1}",Music.Key, Music.Value);
+                }
+
+                string output = JsonConvert.SerializeObject(MyMusicDictLst);
+                Console.WriteLine(output);
+                Console.ReadLine();
+                Dictionary<string, MusicFile> deserializedList = JsonConvert.DeserializeObject<Dictionary<string, MusicFile>>(output);
+
+                foreach (KeyValuePair<string, MusicFile> desMusic in deserializedList)
+                {
+                    Console.WriteLine("Music List");
+                    Console.WriteLine("Key = {0}, Value = {1}", desMusic.Key, desMusic.Value);
+                }
+                */
                 //  this.textBlock.Text = output.ToString();
-            }.
+            }
             else
             {
                 //this.ChoosePlaylist1.Items.Add("Operation cancelled.");
