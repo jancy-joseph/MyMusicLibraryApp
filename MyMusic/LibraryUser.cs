@@ -18,6 +18,10 @@ namespace MyMusic
         public string UserName { get; set; }
         public string USerPassword { get; set; }
         /// <summary>
+        /// Lists of User Playlists
+        /// </summary>
+        public List<UserPlaylist> LibUserPlaylist;
+        /// <summary>
         /// Hold the List of Music playlists of the Playlists class
         /// </summary>
 
