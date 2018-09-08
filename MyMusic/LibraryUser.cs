@@ -20,17 +20,12 @@ namespace MyMusic
         /// <summary>
         /// Lists of User Playlists
         /// </summary>
-        public List<UserPlaylist> LibUserPlaylist;
+        //public List<UserPlaylist> LibUserPlaylist;
         /// <summary>
         /// Hold the List of Music playlists of the Playlists class
         /// </summary>
 
-        // public MusicPlaylist[] UserPlaylist { get; set; }
-        //public List<UserPlaylist> LibUsersList = new List<UserPlaylist>();
-        public static async Task<ICollection<UserPlaylist>> GetMyPlaylist()
-        {
-
-        }
+       
         public static  async Task<ICollection<LibraryUser>> GetLibraryUsers()
         {
             var LibUsersList = new List<LibraryUser>();
@@ -50,10 +45,11 @@ namespace MyMusic
             }
             return LibUsersList;
         }
-         public static void WriteLibraryUserToFile(LibraryUser myUser)
+         public  static void WriteLibraryUserToFile(LibraryUser myUser)
         {
-            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}\n";
+            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}";
              FileHelper.WriteTextFileAsync(LOGIN_FILE_NAME, LibUserData);
+          
         }
         public static  async Task<bool> ValidateLibraryUser(LibraryUser myUser)
         {
@@ -71,7 +67,7 @@ namespace MyMusic
                     USerPassword = lineParts[1]
                 };
                 // Checking if the user object is in the Stored Login config file.
-                if(LibUser.Equals(myUser))
+                if((LibUser.UserName ==myUser.UserName)&& (LibUser.USerPassword ==myUser.USerPassword))
                 {
                     return true;
                 }

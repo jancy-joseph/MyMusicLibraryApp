@@ -9,10 +9,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-    <Grid >
+    <Grid>
+        <Popup>
+            <Grid Background="#FFE5E5E5"/>
+        </Popup>
+        <Button x:Name="Pause" Content="Pause" HorizontalAlignment="Left" Height="66" Margin="686,611,0,0" VerticalAlignment="Top" Width="133" Click="Pause_Click"/>
+        <ListView x:Name="MyViewlist"  HorizontalAlignment="Left" Height="300" Margin="283,276,0,0" VerticalAlignment="Top" Width="536"  SelectionMode="Multiple" SelectionChanged="MyViewlist_SelectionChanged">
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <Grid >
+                        <TextBlock Text="{Binding MFileName}"  ></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
 
-        <Button  Name ="Back" Content="Back" HorizontalAlignment="Left" Height="73" Margin="10,10,0,0" VerticalAlignment="Top" Width="156" RenderTransformOrigin="0.248,-4.992"/>
+        </ListView>
+        <Button x:Name="PickFileToMusicCollection" Content="MusicFileCollection" HorizontalAlignment="Left" Margin="283,611,0,0" VerticalAlignment="Top" Width="302" Height="66" Click="PickFileToMusicCollection_Click" RenderTransformOrigin="0.535,-1.496"/>
+        <TextBox x:Name="TxtUSER" HorizontalAlignment="Left" Margin="283,54,0,0" Text="TextBox" VerticalAlignment="Top" Height="94" RenderTransformOrigin="0.5,0.5" Width="536"/>
+        <Button x:Name ="CreatePlaylist" Content="Create Playlist" HorizontalAlignment="Left" Margin="283,730,0,0" VerticalAlignment="Top" Height="80" Width="302" Click="CreatePlaylist_Click"/>
+
 
     </Grid>
 </Page>

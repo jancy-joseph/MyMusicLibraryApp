@@ -21,8 +21,8 @@ using System.Diagnostics;
 using System.Text;
 using Windows.Media.Playlists;
 using Windows.Storage.FileProperties;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+using Windows.Storage.Search;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,23 +33,38 @@ namespace MyMusic
     /// </summary>
     public sealed partial class MyMusicCollection : Page
     {
-        MediaPlayer MyPlayer;
-        StorageFile file;
+        
+        MediaPlayer player;
+        LibraryUser LibUserObject;
 
         public MyMusicCollection()
         {
             this.InitializeComponent();
-            MyPlayer = new MediaPlayer();
-            LoadMyFullCollection();
+            player = new MediaPlayer();
+        }
 
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            LibUserObject = (LibraryUser)e.Parameter;
+            TxtUSER.Text = LibUserObject.UserName;
+            // parameters.Name
+            // parameters.Text
+            // ...
+            //LoadLibUserPlaylist(Userobject.UserName);
+            DataContext = MusicFile.LoadMyMusicCollection();
 
         }
-        public async void LoadMyFullCollection()
+        private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, MusicFile> MyMusicDictLst = new Dictionary<string, MusicFile>();
-   
-            var MusicJsonObj= new JsonObject();
-            
+            player.Pause();
+        }
+
+        private async void PickFileToMusicCollection_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<string> dataList = new ObservableCollection<string>();
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
             picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
             picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.MusicLibrary;
@@ -59,18 +74,17 @@ namespace MyMusic
             picker.FileTypeFilter.Add(".wma");
             picker.FileTypeFilter.Add(".ogg");
 
-            IReadOnlyList<StorageFile> FilesDiscovered = await picker.PickMultipleFilesAsync();
-            
-            if (FilesDiscovered.Count > 0)
+            IReadOnlyList<StorageFile> files = await picker.PickMultipleFilesAsync();
+            if (files.Count > 0)
             {
                 //StringBuilder output = new StringBuilder("Picked files:\n");
 
                 // Application now has read/write access to the picked file(s)
-                foreach (Windows.Storage.StorageFile fileToAdd in FilesDiscovered)
+                foreach (Windows.Storage.StorageFile fileToAdd in files)
                 {
+                    if (MusicFile.MyMusicDictList.ContainsKey(fileToAdd.Name))
+                        continue;
                     MusicProperties musicProperties = await fileToAdd.Properties.GetMusicPropertiesAsync();
-                    //MyPlayer.AutoPlay = false;
-                    //MyPlayer.Source = MediaSource.CreateFromStorageFile(fileToAdd);
 
                     var mymusic = new MusicFile()
                     {
@@ -80,54 +94,43 @@ namespace MyMusic
                         MArtist = musicProperties.Artist,
                         MTitle = musicProperties.Title
                     };
-                 //   MyMusicDictLst.Add(mymusic.MFileName, mymusic);
-                    MusicFileList.Add(mymusic);
-                    //string output = JsonConvert.SerializeObject(mymusic);
+                     MusicFile.MyMusicDictList.Add(mymusic.MFileName, mymusic);
+                    dataList.Add(mymusic.MFileName);
 
-                    // jObj.Add();
-                    //this.ChoosePlaylist1.Items.Add(fileToAdd.Path);
-                    // output.Append(file.Name + "\n");
                 }
-               
-
-                /*
-                foreach ( KeyValuePair<string, MusicFile> Music in MyMusicDictLst)
+                this.MyViewlist.ItemsSource = dataList;
+                foreach (KeyValuePair<string, MusicFile> Music in MusicFile.MyMusicDictList)
                 {
-                    Console.WriteLine("Music List");
-                    Console.WriteLine("Key = {0}, Value = {1}",Music.Key, Music.Value);
+                    Debug.WriteLine("Music List");
+                    Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value);
                 }
-
-                string output = JsonConvert.SerializeObject(MyMusicDictLst);
-                Console.WriteLine(output);
-                Console.ReadLine();
-                Dictionary<string, MusicFile> deserializedList = JsonConvert.DeserializeObject<Dictionary<string, MusicFile>>(output);
-
-                foreach (KeyValuePair<string, MusicFile> desMusic in deserializedList)
-                {
-                    Console.WriteLine("Music List");
-                    Console.WriteLine("Key = {0}, Value = {1}", desMusic.Key, desMusic.Value);
-                }
-                */
-                //  this.textBlock.Text = output.ToString();
             }
             else
             {
-                //this.ChoosePlaylist1.Items.Add("Operation cancelled.");
+                TxtUSER.Text = "Operation cancelled.";
             }
-
         }
-        public static void AddMusicToFullCollectiontocheckbox()
+
+        private void MyViewlist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            player.AutoPlay = false;
+            Debug.WriteLine(MyViewlist.SelectedItem);
+            foreach (KeyValuePair<string, MusicFile> Music in MusicFile.MyMusicDictList)
+            {
+                if (Music.Key == (string)MyViewlist.SelectedItem)
+                {
+                    player.Source = MediaSource.CreateFromStorageFile(Music.Value.MFile);
+                    player.Play();
+
+                }
+
+
+            }
         }
-        public static void RemoveMusicFromColelction()
+
+        private void CreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(LibUserPlaylist), LibUserObject);
         }
-        public static void playMusic()
-        {
-
-        }
-
-
     }
 }

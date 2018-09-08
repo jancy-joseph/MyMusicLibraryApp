@@ -46,7 +46,7 @@ namespace MyMusic
             };
             if(await LibraryUser.ValidateLibraryUser(myUser))
             {
-                this.Frame.Navigate(typeof(MyMusicCollection));
+                this.Frame.Navigate(typeof(MyMusicCollection), myUser);
             }
             else
             {
