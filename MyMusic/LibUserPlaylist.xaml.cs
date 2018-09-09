@@ -31,13 +31,12 @@ namespace MyMusic
         {
             base.OnNavigatedTo(e);
 
-            LibUserObject = (LibraryUser)e.Parameter;
-            TxtUSER.Text = LibUserObject.UserName;
+            LibraryUser LibUserObject = (LibraryUser)e.Parameter;
+            //TxtUSER.Text = LibUserObject.UserName;
             // parameters.Name
             // parameters.Text
-            // ...
-            //LoadLibUserPlaylist(Userobject.UserName);
-            DataContext = MusicFile.LoadMyMusicCollection();
+            // ..
+            DataContext=
 
         }
     }

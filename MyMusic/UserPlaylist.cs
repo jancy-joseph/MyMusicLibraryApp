@@ -13,7 +13,7 @@ namespace MyMusic
         /// <summary>
         /// Lists of User Music Files in a  Given Playlist
         /// </summary>
-       // public List<MusicFile> MusicFLists;
+        public List<MusicFile> MusicFLists;
         
 
         public void LoadMyMusic()

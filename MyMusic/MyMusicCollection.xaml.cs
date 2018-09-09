@@ -130,6 +130,23 @@ namespace MyMusic
 
         private void CreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
+            var PLaylist1 = new UserPlaylist()
+            {
+                playlistName = txtPlaylistName.Text,
+                playlistUserName = LibUserObject.UserName
+            };
+            LibUserObject.LibUserPlaylist.Add(PLaylist1);
+            foreach (string Filename in this.MyViewlist.SelectedItems)
+            {
+                PLaylist1.LibUserPlaylist.Add(Filename);
+                this.PlaylistView.Items.Add(Filename);
+
+            }
+            foreach (string filetoplay in PLaylist1.LibUserPlaylist)
+            {
+                FindndPLayMusic(filetoplay);
+            }
+
             this.Frame.Navigate(typeof(LibUserPlaylist), LibUserObject);
         }
     }

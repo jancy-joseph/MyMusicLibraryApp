@@ -8,7 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <Grid Margin="0,20,0,-20">
+        <TextBox Name="txtPlaylistName" HorizontalAlignment="Center" Margin="0,76,0,0" Text="TextBox" VerticalAlignment="Top" Height="123" RenderTransformOrigin="0.5,0.5" Width="434">
+            <TextBox.RenderTransform>
+                <CompositeTransform ScaleY="-1"/>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <ListView x:Name="PlaylistView" HorizontalAlignment="Left" Height="434" Margin="360,248,0,0" VerticalAlignment="Top" Width="607" SelectionMode="Multiple" SelectionChanged="PlaylistView_SelectionChanged"/>
+ </Grid>
 </Page>

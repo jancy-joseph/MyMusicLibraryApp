@@ -20,7 +20,7 @@ namespace MyMusic
         /// <summary>
         /// Lists of User Playlists
         /// </summary>
-        //public List<UserPlaylist> LibUserPlaylist;
+        public List<UserPlaylist> LibUserPlaylist = new List<UserPlaylist>();
         /// <summary>
         /// Hold the List of Music playlists of the Playlists class
         /// </summary>
