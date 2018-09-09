@@ -28,7 +28,11 @@
         <Button x:Name="PickFileToMusicCollection" Content="MusicFileCollection" HorizontalAlignment="Left" Margin="283,611,0,0" VerticalAlignment="Top" Width="302" Height="66" Click="PickFileToMusicCollection_Click" RenderTransformOrigin="0.535,-1.496"/>
         <TextBox x:Name="TxtUSER" HorizontalAlignment="Left" Margin="283,54,0,0" Text="TextBox" VerticalAlignment="Top" Height="94" RenderTransformOrigin="0.5,0.5" Width="536"/>
         <Button x:Name ="CreatePlaylist" Content="Create Playlist" HorizontalAlignment="Left" Margin="283,730,0,0" VerticalAlignment="Top" Height="80" Width="302" Click="CreatePlaylist_Click"/>
-
+        <Popup x:Name="popup"  Width="200" Height="100" Margin="0,20,0,0">
+            <Border BorderBrush="Black" BorderThickness="2" Background="AliceBlue">
+                <TextBox x:Name="txtBox" VerticalAlignment="Center" Margin="15,0,15,0"/>
+            </Border>
+        </Popup>
 
     </Grid>
 </Page>

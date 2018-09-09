@@ -36,7 +36,12 @@ namespace MyMusic
             // parameters.Name
             // parameters.Text
             // ..
-            DataContext=
+          
+
+        }
+
+        private void PlaylistView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

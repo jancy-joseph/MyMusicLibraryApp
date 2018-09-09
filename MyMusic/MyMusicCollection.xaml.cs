@@ -132,22 +132,39 @@ namespace MyMusic
         {
             var PLaylist1 = new UserPlaylist()
             {
-                playlistName = txtPlaylistName.Text,
+                playlistName = txtBox.Text,
                 playlistUserName = LibUserObject.UserName
             };
             LibUserObject.LibUserPlaylist.Add(PLaylist1);
-            foreach (string Filename in this.MyViewlist.SelectedItems)
+            foreach (string myFilename in this.MyViewlist.SelectedItems)
             {
-                PLaylist1.LibUserPlaylist.Add(Filename);
-                this.PlaylistView.Items.Add(Filename);
+               // PLaylist1.MusicFLists.Add(myFilename.MFileName);
+               // this.PlaylistView.Items.Add(myFilename);
 
             }
-            foreach (string filetoplay in PLaylist1.LibUserPlaylist)
+            /*
+            foreach(string filetoplay in PLaylist1.MusicFLists)
             {
-                FindndPLayMusic(filetoplay);
+                FindandPlayMusic(filetoplay);
             }
-
+            */
             this.Frame.Navigate(typeof(LibUserPlaylist), LibUserObject);
+        }
+
+        public void FindandPlayMusic(string myFilename)
+        {
+            player.AutoPlay = false;
+            Debug.WriteLine(myFilename);
+            foreach (KeyValuePair<string, MusicFile> Music in MusicFile.MyMusicDictList)
+            {
+                if (Music.Key == myFilename)
+                {
+                    player.Source = MediaSource.CreateFromStorageFile(Music.Value.MFile);
+                    player.Play();
+
+                }
+
+            }
         }
     }
 }
