@@ -18,6 +18,8 @@ namespace MyMusic
             var localFolder = ApplicationData.Current.LocalFolder;
             var textFile =  await localFolder.CreateFileAsync(FileName,CreationCollisionOption.OpenIfExists);
             var textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite);
+            var EOFposition = textStream.Size;
+            textStream.Seek(textStream.Size);
             var textWriter = new  DataWriter(textStream);
             textWriter.WriteString(content);
             await textWriter.StoreAsync();

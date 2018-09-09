@@ -47,7 +47,7 @@ namespace MyMusic
         }
          public  static void WriteLibraryUserToFile(LibraryUser myUser)
         {
-            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}";
+            var LibUserData = $"{myUser.UserName},{myUser.USerPassword},";
              FileHelper.WriteTextFileAsync(LOGIN_FILE_NAME, LibUserData);
           
         }

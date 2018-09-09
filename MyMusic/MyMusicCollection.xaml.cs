@@ -59,7 +59,7 @@ namespace MyMusic
         }
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            player.Pause();
+            player.Pause();          
         }
 
         private async void PickFileToMusicCollection_Click(object sender, RoutedEventArgs e)
