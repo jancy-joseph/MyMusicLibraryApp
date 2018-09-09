@@ -36,7 +36,7 @@ namespace MyMusic
     /// <summary>
     /// Source of the file to play using Mediaplayer
     /// </summary>
-        public StorageFile MFile { get; set; }
+        //public StorageFile MFile { get; set; }
         /// <summary>
         /// Name of the File to be played
         /// </summary>
@@ -60,7 +60,7 @@ namespace MyMusic
 
         public static Dictionary<string, MusicFile> MyMusicDictList = new Dictionary<string, MusicFile>();
         
-        public  static async Task<ICollection<MusicFile>> LoadMyMusicCollection()
+        public  static async Task<ICollection<string>> LoadMyMusicCollection()
         { 
            ObservableCollection<string> dataList = new ObservableCollection<string>();
             var MusicFileList = new List<MusicFile>();
@@ -84,16 +84,17 @@ namespace MyMusic
                     var mymusic = new MusicFile()
                     {
                          MFileName = fileToAdd.Name,
-                         MFile = fileToAdd,
+                         //MFile = fileToAdd,
                          MAlbum = musicProperties.Album,
                          MArtist = musicProperties.Artist,
                          MTitle = musicProperties.Title
                     };
                     MyMusicDictList.Add(mymusic.MFileName, mymusic);
                     MusicFileList.Add(mymusic);
-                    dataList.Add(mymusic.MFileName);                                              
+                    dataList.Add(mymusic.MFileName);    
+                    
               }
-              //this.MyViewlist.ItemsSource = dataList;
+              //MyViewlist.ItemsSource = dataList;
               foreach (KeyValuePair<string, MusicFile> Music in MyMusicDictList)
               {
                         Debug.WriteLine("Music List");
@@ -105,7 +106,9 @@ namespace MyMusic
                 //MyMusicCollection.TxtUSER.txt= "Operation cancelled.";
                 Debug.WriteLine("Operation cancelled in Music File");
            }
-           return MusicFileList;
+
+            // return MusicFileList;
+            return dataList;
         }
        
     }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +34,53 @@ namespace MyMusic
         {
 
         }
-        
+        public static async Task<UserPlaylist> DeserelizeDataFromJson(string fileName)
+        {
+            try
+            {
+                var persons = new UserPlaylist();
+                var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                var file = await Folder.GetFileAsync(fileName + ".json");
+                var data = await file.OpenReadAsync();
+
+                using (StreamReader r = new StreamReader(data.AsStream()))
+                {
+                    string text = r.ReadToEnd();
+                    UserPlaylist[] p = JsonConvert.DeserializeObject<UserPlaylist[]>(text);
+                    foreach (var i in p)
+                    {
+                        //persons.UserPlaylists.Add(i);
+                    }
+                }
+                return persons;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static async Task<string> SerelizeDataToJson(UserPlaylist MyListPlay, string filename)
+        {
+            try
+            {
+                var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                var file = await Folder.CreateFileAsync(filename + ".json", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                var data = await file.OpenStreamForWriteAsync();
+
+                using (StreamWriter r = new StreamWriter(data))
+                {
+                    var serelizedfile = JsonConvert.SerializeObject(MyListPlay);
+                    r.Write(serelizedfile);
+
+                }
+                return filename;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         /*
         public static  Task<ICollection<LibraryUser>> GetPlaylists()
         {
@@ -90,7 +138,7 @@ namespace MyMusic
             return false;
           
         }
-       */ 
+       */
 
     }
 }
