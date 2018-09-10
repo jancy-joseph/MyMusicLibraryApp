@@ -18,11 +18,11 @@ namespace MyMusic
         public string UserName { get; set; }
         public string USerPassword { get; set; }
         /// <summary>
-        /// Lists of User Playlists
+        /// Lists of Playlists created by user
         /// </summary>
         public List<UserPlaylist> LibUserPlaylist = new List<UserPlaylist>();
         /// <summary>
-        /// Hold the List of Playlists and Playlists stored Files location
+        /// Hold the List of Playlists and Location of Json File.Not sure if needed??
         /// </summary>
          public static Dictionary<string, string> LibUserPlaylistDictList = new Dictionary<string, string>();
 

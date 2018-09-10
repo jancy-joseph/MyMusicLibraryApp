@@ -13,9 +13,9 @@ namespace MyMusic
         public string playlistName { get; set; }
         public string playlistUserName { get; set; }
         /// <summary>
-        /// Lists of User Music Files in a  Given Playlist
+        /// Lists of  Music Files in a given Playlist created by user.
         /// </summary>
-        public List<MusicFile> MusicFLists;
+        public List<MusicFile> MusicFLists = new List<MusicFile>();
         
 
         public void LoadMyMusic()
@@ -36,9 +36,10 @@ namespace MyMusic
         }
         public static async Task<UserPlaylist> DeserelizeDataFromJson(string fileName)
         {
+
             try
             {
-                var persons = new UserPlaylist();
+                var DeserializedJsonPlayLst = new UserPlaylist();
                 var Folder = Windows.Storage.ApplicationData.Current.LocalFolder;
                 var file = await Folder.GetFileAsync(fileName + ".json");
                 var data = await file.OpenReadAsync();
@@ -46,19 +47,19 @@ namespace MyMusic
                 using (StreamReader r = new StreamReader(data.AsStream()))
                 {
                     string text = r.ReadToEnd();
-                    UserPlaylist[] p = JsonConvert.DeserializeObject<UserPlaylist[]>(text);
-                    foreach (var i in p)
-                    {
-                        //persons.UserPlaylists.Add(i);
-                    }
+                    DeserializedJsonPlayLst = JsonConvert.DeserializeObject<UserPlaylist>(text);
+                    //foreach (var i in p)
+                    //{
+                    //    persons.UserPlaylists.Add(i);
+                    // }
                 }
-                return persons;
+                return DeserializedJsonPlayLst;
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }
+        }   
 
         public static async Task<string> SerelizeDataToJson(UserPlaylist MyListPlay, string filename)
         {

@@ -34,17 +34,17 @@ namespace MyMusic
         }
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-             this.Frame.Navigate(typeof(AddUser));
+            this.Frame.Navigate(typeof(AddUser));
         }
 
-        private  async void Login_Click(object sender, RoutedEventArgs e)
+        private async void Login_Click(object sender, RoutedEventArgs e)
         {
             var myUser = new LibraryUser()
             {
                 UserName = txtUserName.Text,
                 USerPassword = txtPassword.Password
             };
-            if(await LibraryUser.ValidateLibraryUser(myUser))
+            if (await LibraryUser.ValidateLibraryUser(myUser))
             {
                 this.Frame.Navigate(typeof(MyMusicCollection), myUser);
             }
@@ -66,5 +66,19 @@ namespace MyMusic
             }
 
         }
+
+        private void MenuButton2_Click(object sender, RoutedEventArgs e)
+        {
+            // Frame.Navigate(typeof(MyMusicCollection));
+        }
+        private void MenuButton1_Click(object sender, RoutedEventArgs e)
+        {
+            //Frame.Navigate(typeof());
+        }
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
     }
+        
 }

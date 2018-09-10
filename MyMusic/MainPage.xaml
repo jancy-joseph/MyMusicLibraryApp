@@ -9,28 +9,46 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="42*"/>
-            <ColumnDefinition Width="72*"/>
-            <ColumnDefinition Width="140*"/>
-            <ColumnDefinition Width="121*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="114*"/>
-            <RowDefinition Height="135*"/>
-            <RowDefinition Height="113*"/>
-            <RowDefinition Height="108*"/>
-            <RowDefinition Height="530*"/>
-        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/travel2.jpg" Opacity="0.8"/>
+        </Grid.Background>
+        <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="990">
+            <SplitView.Pane>
+                <StackPanel Background="Gray">
+                    <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="My_MusicButton" FontFamily="Segoe MDL2 Assets"   Content="&#xE815;"
+                    Width="50" Height="50" Background="Transparent" Click="MenuButton1_Click"/>
+                        <TextBlock x:Name="My_Music" Text="My Music" FontSize="18" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE90B;"
+                        Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
+                        <TextBlock Text="Playlist" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                    </StackPanel>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame x:Name ="mainFrame">
+                </Frame>
+            </SplitView.Content>
+        </SplitView>
 
-        <TextBlock Text="User Name :" Margin="43,10.4,43,9.8" Grid.Column="1" Grid.Row="1"/>
-        <TextBox  Name="txtUserName" Text="{Binding UserName, Mode = Twoway}" Margin="62,20.4,34,26.8" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBlock Text="User Name :" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="81" Margin="400,120,0,0"/>
+        <TextBox  Name="txtUserName" Text="{Binding UserName, Mode = Twoway}" Margin="554,89,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="83" Width="347"/>
+        <TextBlock Text="Password :" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="69" Margin="412,220,0,0" TextAlignment="Center"/>
+        <PasswordBox x:Name="txtPassword"  Password="{Binding  USerPassword, Mode = Twoway }"  Header="           Password" PlaceholderText="Enter your password" PasswordChanged="txtPassword_PasswordChanged" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="347" Margin="554,180,0,0"/>
+        <TextBlock x:Name="MainStatusText" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="734" Margin="426,339,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <TextBlock.RenderTransform>
+                <CompositeTransform Rotation="-0.081"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button x:Name="AddUser" Content="Add User" HorizontalAlignment="Left" Width="128" Click="AddUser_Click" Height="46" VerticalAlignment="Top" Margin="886,272,0,0"/>
+        <Button x:Name="Login" Content="Login" HorizontalAlignment="Left" Height="46" RenderTransformOrigin="0.615,0.202" VerticalAlignment="Top" Click="Login_Click" Width="152" Margin="598,265,0,0"/>
 
-        <TextBlock Text="Password :" Margin="43,10.2,43,9.6" Grid.Column="1" Grid.Row="2"/>
-        <PasswordBox x:Name="txtPassword"  Password="{Binding  USerPassword, Mode = Twoway }"  Header="Password" PlaceholderText="Enter your password" Grid.Row="2" Grid.Column="2" PasswordChanged="txtPassword_PasswordChanged"/>
-        <TextBlock x:Name="MainStatusText" Margin="10" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="3"/>
-
-        <Button x:Name="AddUser" Content="Add User" HorizontalAlignment="Center" Width="100" Click="AddUser_Click" Grid.Row="3" Grid.Column="3" Height="32" VerticalAlignment="Center"/>
-        <Button x:Name="Login" Content="Login" HorizontalAlignment="Center" Height="32" RenderTransformOrigin="0.615,0.202" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Click="Login_Click" Width="58"/>
     </Grid>
 </Page>
