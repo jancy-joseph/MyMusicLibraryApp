@@ -23,6 +23,7 @@ namespace MyMusic
             var textWriter = new DataWriter(textStream);
             textWriter.WriteString(content);
             await textWriter.StoreAsync();
+            
         }
         public static async Task<string> ReadTextFileAsync(string FileName)
         {

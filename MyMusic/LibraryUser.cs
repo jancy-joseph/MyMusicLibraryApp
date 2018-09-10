@@ -22,10 +22,11 @@ namespace MyMusic
         /// </summary>
         public List<UserPlaylist> LibUserPlaylist = new List<UserPlaylist>();
         /// <summary>
-        /// Hold the List of Music playlists of the Playlists class
+        /// Hold the List of Playlists and Playlists stored Files location
         /// </summary>
+         public static Dictionary<string, string> LibUserPlaylistDictList = new Dictionary<string, string>();
 
-       
+
         public static  async Task<ICollection<LibraryUser>> GetLibraryUsers()
         {
             var LibUsersList = new List<LibraryUser>();
@@ -47,7 +48,7 @@ namespace MyMusic
         }
          public  static void WriteLibraryUserToFile(LibraryUser myUser)
         {
-            var LibUserData = $"{myUser.UserName},{myUser.USerPassword},";
+            var LibUserData = $"{myUser.UserName},{myUser.USerPassword}\n";
              FileHelper.WriteTextFileAsync(LOGIN_FILE_NAME, LibUserData);
           
         }

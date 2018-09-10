@@ -89,20 +89,20 @@ namespace MyMusic
                     var mymusic = new MusicFile()
                     {
                         MFileName = fileToAdd.Name,
-                        MFile = fileToAdd,
+                        //MFile = fileToAdd,
                         MAlbum = musicProperties.Album,
                         MArtist = musicProperties.Artist,
                         MTitle = musicProperties.Title
                     };
-                     MusicFile.MyMusicDictList.Add(mymusic.MFileName, mymusic);
+                     MusicFile.MyMusicDictList.Add(mymusic.MFileName, fileToAdd);
                     dataList.Add(mymusic.MFileName);
 
                 }
                 this.MyViewlist.ItemsSource = dataList;
-                foreach (KeyValuePair<string, MusicFile> Music in MusicFile.MyMusicDictList)
+                foreach (KeyValuePair<string, StorageFile> Music in MusicFile.MyMusicDictList)
                 {
                     Debug.WriteLine("Music List");
-                    Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value);
+                    Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value.Path);
                 }
             }
             else
@@ -115,12 +115,12 @@ namespace MyMusic
         {
             player.AutoPlay = false;
             Debug.WriteLine(MyViewlist.SelectedItem);
-            foreach (KeyValuePair<string, MusicFile> Music in MusicFile.MyMusicDictList)
+            foreach (KeyValuePair<string, StorageFile> Music in MusicFile.MyMusicDictList)
             {
                 if (Music.Key == (string)MyViewlist.SelectedItem)
                 {
-                    player.Source = MediaSource.CreateFromStorageFile(Music.Value.MFile);
-                    player.Play();
+                  //  player.Source = MediaSource.CreateFromStorageFile(Music.Value);
+                  //  player.Play();
 
                 }
 
@@ -159,8 +159,8 @@ namespace MyMusic
             {
                 if (Music.Key == myFilename)
                 {
-                    player.Source = MediaSource.CreateFromStorageFile(Music.Value.MFile);
-                    player.Play();
+                   // player.Source = MediaSource.CreateFromStorageFile(Music.Value.MFile);
+                   // player.Play();
 
                 }
 

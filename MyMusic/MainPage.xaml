@@ -28,8 +28,7 @@
 
         <TextBlock Text="Password :" Margin="43,10.2,43,9.6" Grid.Column="1" Grid.Row="2"/>
         <PasswordBox x:Name="txtPassword"  Password="{Binding  USerPassword, Mode = Twoway }"  Header="Password" PlaceholderText="Enter your password" Grid.Row="2" Grid.Column="2" PasswordChanged="txtPassword_PasswordChanged"/>
-        <TextBlock x:Name="MainStatusText" Margin="10" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="2"/>
-
+        <TextBlock x:Name="MainStatusText" Margin="10" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="3"/>
 
         <Button x:Name="AddUser" Content="Add User" HorizontalAlignment="Center" Width="100" Click="AddUser_Click" Grid.Row="3" Grid.Column="3" Height="32" VerticalAlignment="Center"/>
         <Button x:Name="Login" Content="Login" HorizontalAlignment="Center" Height="32" RenderTransformOrigin="0.615,0.202" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Click="Login_Click" Width="58"/>

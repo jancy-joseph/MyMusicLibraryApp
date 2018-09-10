@@ -58,7 +58,7 @@ namespace MyMusic
         /// </summary>
         public string MTitle { get; set; }
 
-        public static Dictionary<string, MusicFile> MyMusicDictList = new Dictionary<string, MusicFile>();
+        public static Dictionary<string, StorageFile> MyMusicDictList = new Dictionary<string, StorageFile>();
         
         public  static async Task<ICollection<string>> LoadMyMusicCollection()
         { 
@@ -84,21 +84,21 @@ namespace MyMusic
                     var mymusic = new MusicFile()
                     {
                          MFileName = fileToAdd.Name,
-                         //MFile = fileToAdd,
                          MAlbum = musicProperties.Album,
                          MArtist = musicProperties.Artist,
                          MTitle = musicProperties.Title
                     };
-                    MyMusicDictList.Add(mymusic.MFileName, mymusic);
+                    MyMusicDictList.Add(mymusic.MFileName, fileToAdd);
+                    //Trying to Bind an object to XAML didnot work so keeping for next time
                     MusicFileList.Add(mymusic);
                     dataList.Add(mymusic.MFileName);    
                     
               }
               //MyViewlist.ItemsSource = dataList;
-              foreach (KeyValuePair<string, MusicFile> Music in MyMusicDictList)
+              foreach (KeyValuePair<string, StorageFile> Music in MyMusicDictList)
               {
                         Debug.WriteLine("Music List");
-                        Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value);
+                        Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value.Path);
               }
            }
            else
