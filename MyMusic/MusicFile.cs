@@ -12,7 +12,7 @@ using Windows.Storage.Search;
 
 namespace MyMusic
 {
-    class MusicFile
+    public class MusicFile
     {
         //These are properties that can be got from a music file
 
@@ -35,7 +35,7 @@ namespace MyMusic
         public uint Year { get; set; }
 
     */
-        ObservableCollection<MusicFile> MusicFilestoDisplay = new ObservableCollection<MusicFile>();
+        //ObservableCollection<MusicFile> MusicFilestoDisplay = new ObservableCollection<MusicFile>();
         /// <summary>
         /// Name of the Music File
         /// </summary>
@@ -57,66 +57,36 @@ namespace MyMusic
         /// </summary>
         public string MTitle { get; set; }
 
-        /// <summary>
-        /// Creating a Dictionary of all Music Files discovered so that it be easy to play using Media Player
-        /// </summary>
-
-        public static Dictionary<string, StorageFile> MyMusicDictList = new Dictionary<string, StorageFile>();
-
-        // <summary>
-        /// Function to Discover all Music Files from
-        /// </summary>
-        /// <returns>Collection of Songs Discovered from Known Folders</returns>
-        public static async Task<ICollection<MusicFile>> LoadMyMusicCollection()
+        public MusicFile(string FileName, string Title, string Album, string Artist)
         {
-            ObservableCollection<MusicFile> MusicFileList = new ObservableCollection<MusicFile>();
-            QueryOptions queryOption = new QueryOptions
-                              (CommonFileQuery.OrderByTitle, new string[] { ".mp3", ".mp4", ".wma", ".ogg" });
-
-            queryOption.FolderDepth = FolderDepth.Deep;
-
-            Queue<IStorageFolder> folders = new Queue<IStorageFolder>();
-
-            var files = await KnownFolders.MusicLibrary.CreateFileQueryWithOptions
-                       (queryOption).GetFilesAsync();
-            if (files.Count > 0)
-            {
-                foreach (var fileToAdd in files)
-                {
-                    if (MusicFile.MyMusicDictList.ContainsKey(fileToAdd.Name))
-                        continue;
-                    MusicProperties musicProperties = await fileToAdd.Properties.GetMusicPropertiesAsync();
-
-                    var mymusic = new MusicFile()
-                    {
-                        MFileName = fileToAdd.Name,
-                        MAlbum = musicProperties.Album,
-                        MArtist = musicProperties.Artist,
-                        MTitle = musicProperties.Title
-                    };
-                    MusicFile.MyMusicDictList.Add(mymusic.MFileName, fileToAdd);
-                    MusicFileList.Add(mymusic);
-                      //Trying to Bind an object to XAML didnot work so keeping for next time
-                    // dataList.Add(mymusic.MFileName);    
-
-                }
-                //MyViewlist.ItemsSource = dataList;
-                foreach (KeyValuePair<string, StorageFile> Music in MusicFile.MyMusicDictList)
-                {
-                    Debug.WriteLine("Music List");
-                    Debug.WriteLine("Key = {0}, Value = {1}", Music.Key, Music.Value.Path);
-                }
-            }
+            if (!string.IsNullOrEmpty(FileName))
+                MFileName = FileName;
             else
-            {
-                //MyMusicCollection.TxtUSER.txt= "Operation cancelled.";
-                Debug.WriteLine("Discovery from Known Folders didnt work .Operation cancelled!!");
-            }
-
-            return MusicFileList;
-
+                MFileName = "Unknown Title";
+            if (!string.IsNullOrEmpty(MTitle))
+                MTitle = Title;
+            else
+                MTitle = "Unknown Title";
+            if(!string.IsNullOrEmpty(Album))
+                MAlbum = Album;
+            else
+                MTitle = "Unknown Title";
+            if (!string.IsNullOrEmpty(Artist))
+                MArtist = Artist;
+            else
+                MTitle = "Unknown Artist";
+            McoverImage = String.Format("Assets/cd-654603_1280.png");
         }
 
-    }
 
+
+       
+
+
+
+    }
 }
+
+
+
+

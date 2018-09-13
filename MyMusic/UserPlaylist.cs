@@ -15,7 +15,7 @@ namespace MyMusic
         /// <summary>
         /// Lists of  Music Files in a given Playlist created by user.
         /// </summary>
-        public List<MusicFile> MusicFLists = new List<MusicFile>();
+        public List<string> MusicFLists = new List<string>();
         
 
         public void LoadMyMusic()
