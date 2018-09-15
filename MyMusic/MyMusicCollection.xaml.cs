@@ -37,8 +37,6 @@ namespace MyMusic
         
         MediaPlayer player;
         LibraryUser LibUserObject;
-        //public List<MusicFile> MusicListToDisplay;
-       // public ObservableCollection<MusicFile> MusicListToDisplay;
         private ObservableCollection<MusicFile> MusicCollection;
 
         public MyMusicCollection()
@@ -56,7 +54,7 @@ namespace MyMusic
             base.OnNavigatedTo(e);
             LibUserObject = (LibraryUser)e.Parameter;
             await MusicManager.GetAllMusic(MusicCollection);
-            //TxtUSER.Text = LibUserObject.UserName;
+            TxtUSER.Text = LibUserObject.UserName;
             // parameters.Name
             // parameters.Text
             // ...
@@ -79,24 +77,23 @@ namespace MyMusic
         private void CreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
             
-            //var txtBox.text = "Playlistjancy";
-            var PLaylist1 = new UserPlaylist()
+            var playlist = new UserPlaylist()
             {
                 playlistName = txtBox.Text,
                 playlistUserName = LibUserObject.UserName
             };
 
-            LibUserObject.LibUserPlaylist.Add(PLaylist1);
+            LibUserObject.LibUserPlaylist.Add(playlist);
             foreach (MusicFile song in this.MyViewList.SelectedItems)
             {
-               PLaylist1.MusicFLists.Add(song.MFileName);
+                playlist.MusicFLists.Add(song);
              //  this.PlaylistView.Items.Add(myFilename);
 
             }
             
-            foreach(string Filename in PLaylist1.MusicFLists)
+            foreach(MusicFile song in playlist.MusicFLists)
             {
-                FindandPlayMusic(Filename);
+                FindandPlayMusic(song.MFileName);
             }
             
             this.Frame.Navigate(typeof(LibUserPlaylist), LibUserObject);
@@ -104,13 +101,13 @@ namespace MyMusic
         }
         
     
-        public void FindandPlayMusic(string Filename)
+        public void FindandPlayMusic(string MusicFilename)
         {
             player.AutoPlay = false;
            // Debug.WriteLine(myFilename);
             foreach (KeyValuePair<string, StorageFile> Music in MusicManager.MyMusicDictList)
             {
-                if (Music.Key == Filename)
+                if (Music.Key == MusicFilename)
                 {
                    player.Source = MediaSource.CreateFromStorageFile(Music.Value);
                    player.Play();
@@ -119,14 +116,15 @@ namespace MyMusic
 
             }
         }
-        
+        /*
         private void MyViewList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             player.AutoPlay = false;
-            Debug.WriteLine(MyViewList.SelectedItem);
+            Debug.WriteLine(MyViewList.SelectedItem);                            
+
             foreach (KeyValuePair<string, StorageFile> Music in MusicManager.MyMusicDictList)
             {
-                if (MyViewList.SelectedItem.Equals(Music.Value ))
+                if (Music.Key == MyViewList.SelectedItem.s)
                 {
                     player.Source = MediaSource.CreateFromStorageFile(Music.Value);
                     player.Play();
@@ -135,9 +133,9 @@ namespace MyMusic
 
 
             }
-
+            
         }
-        
+        */
         private void MenuButton2_Click(object sender, RoutedEventArgs e)
         {
             // Frame.Navigate(typeof(MyMusicCollection));
@@ -161,13 +159,32 @@ namespace MyMusic
 
         }
 
-        private void MyViewList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void MyViewList_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var song = (MusicFile)e.ClickedItem;
+            var songName = song.MFileName;
             player.AutoPlay = false;
-            Debug.WriteLine(MyViewList.SelectedItem);
             foreach (KeyValuePair<string, StorageFile> Music in MusicManager.MyMusicDictList)
             {
-                if (MyViewList.SelectedItem.Equals(Music.Value))
+                if (Music.Key == songName)
+                {
+                    player.Source = MediaSource.CreateFromStorageFile(Music.Value);
+                    player.Play();
+
+                }
+
+
+            }
+        }
+
+        private void MyViewList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var song = (MusicFile)MyViewList.SelectedItem;
+            var songName = song.MFileName;
+            player.AutoPlay = false;
+            foreach (KeyValuePair<string, StorageFile> Music in MusicManager.MyMusicDictList)
+            {
+                if (Music.Key == songName)
                 {
                     player.Source = MediaSource.CreateFromStorageFile(Music.Value);
                     player.Play();
@@ -179,5 +196,7 @@ namespace MyMusic
 
         }
     }
+   
+   
 
 }
