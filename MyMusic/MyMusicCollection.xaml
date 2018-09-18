@@ -27,14 +27,14 @@
                         <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE90B;"
                         Width="50" Height="50" Background="Transparent" Click="MenuButton2_Click"/>
                         <TextBlock Text="Playlist" FontSize="18" VerticalAlignment="Center" />
-                        <Button x:Name ="CreatePlaylist" FontFamily="Segoe MDL2 Assets" Content="&#xE710;" HorizontalAlignment="Left" Height="30" Margin="43.4,0,0,0" VerticalAlignment="Center" Width="38" />
+                        <Button x:Name ="CreatePlaylist" FontFamily="Segoe MDL2 Assets" Content="&#xE710;" HorizontalAlignment="Left" Height="30" Margin="43.4,0,0,0" VerticalAlignment="Center" Width="38" Click="CreatePlaylist_Click_1" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                     </StackPanel>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <ListView Name="MyViewList" ItemsSource = "{x:Bind MusicCollection }" Margin = "440,154,413,269" ItemClick="MyViewList_ItemClick" SelectionChanged="MyViewList_SelectionChanged" >
+                <ListView Name="MyViewList" ItemsSource = "{x:Bind MusicCollection }" SelectionMode ="Multiple" Margin = "440,154,413,269" ItemClick="MyViewList_ItemClick" SelectionChanged="MyViewList_SelectionChanged" >
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType = "local:MusicFile">
                             <StackPanel Orientation = "Horizontal" Margin = "2">
@@ -48,16 +48,15 @@
 
             </SplitView.Content>
         </SplitView>
-
-        <TextBox x:Name="txtBox" Margin="930,755,342,191" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Button x:Name="Pause" FontFamily="Segoe MDL2 Assets" Content="&#xE769;" HorizontalAlignment="Left" Height="55" Margin="1201,231,0,0" VerticalAlignment="Top" Width="83" Click="Pause_Click"/>
         <Button x:Name="PickFileToMusicCollection" Content="Music Collection" HorizontalAlignment="Center" Margin="0,745,0,0" VerticalAlignment="Top" Width="301" Height="64" RenderTransformOrigin="0.535,-1.496"/>
 
         <TextBox  HorizontalAlignment="Center" Margin="0,54,0,0" Text="My Music" VerticalAlignment="Top" Height="94" RenderTransformOrigin="0.5,0.5" Width="360"  FontSize="36" FontFamily="Segoe Script"/>
-        <TextBox  x:Name="TxtUSER" HorizontalAlignment="Left" Margin="329,102,0,0"  VerticalAlignment="Top" Height="94" RenderTransformOrigin="0.5,0.5" Width="197" TextAlignment="Center" FontSize="36" FontFamily="Segoe Script"/>
-
+        <TextBox  x:Name="TxtUSER" HorizontalAlignment="Left" Margin="990,54,0,0"  VerticalAlignment="Top" Height="94" RenderTransformOrigin="3.802,-0.017" Width="197" TextAlignment="Center" FontSize="36" FontFamily="Segoe Script"/>
+        <Button  x:Name ="AddtoPlaylist"  HorizontalAlignment="Left" Height="63" Margin="1204,323,0,0" VerticalAlignment="Top" Width="206" Click="AddtoPlaylist_Click" Content="Add to Playlist"/>
         <Button x:Name="DeleteButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" HorizontalAlignment="Left"  Margin="1315,224,0,0" VerticalAlignment="Top" Height="62" Width="95" Click="DeleteButton_Click"/>
         <Button x:Name ="BackButton" FontFamily="Segoe MDL2 Assets" Content="&#xE112;" HorizontalAlignment="Left" Height="50" Margin="1385,10,0,0" VerticalAlignment="Top" Width="105" Click="Back_Click"/>
+        <Button x:Name="PlayButton" FontFamily="Segoe MDL2 Assets" Content="&#xF5B0;" HorizontalAlignment="Left"  Margin="1201,164,0,0" VerticalAlignment="Top" Height="62" Width="95" Click="PlayButton_Click"/>
 
 
     </Grid>

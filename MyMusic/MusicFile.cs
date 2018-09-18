@@ -42,8 +42,8 @@ namespace MyMusic
         public string MFileName { get; set; }
         /// <summary>
         /// Adding a cover Image property as I didnt find it from system class - MusicProperties
-        /// </summary>
-        public string McoverImage { get; set; } = "Assets/cd-654603_1280.png";
+        /// </summary>]
+        public string McoverImage { get; set; }
         /// <summary>
         /// Name of the Music Albumn
         /// </summary>

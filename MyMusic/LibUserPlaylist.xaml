@@ -9,11 +9,24 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="0,20,0,-20">
-        <TextBox Name="txtPlaylistName" HorizontalAlignment="Center" Margin="0,76,0,0" Text="TextBox" VerticalAlignment="Top" Height="123" RenderTransformOrigin="0.5,0.5" Width="434">
+        <TextBox Name="txtPlaylistName" HorizontalAlignment="Center" Margin="0,66,0,0" Text="TextBox" FontSize="36" VerticalAlignment="Top" Height="127" RenderTransformOrigin="-0.021,0.497" Width="391" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <TextBox.RenderTransform>
-                <CompositeTransform ScaleY="-1"/>
+                <CompositeTransform ScaleY="-1" ScaleX="-1" Rotation="-181.193" TranslateX="0.042" TranslateY="4.816"/>
             </TextBox.RenderTransform>
         </TextBox>
-        <ListView x:Name="PlaylistView" HorizontalAlignment="Left" Height="434" Margin="360,248,0,0" VerticalAlignment="Top" Width="607" SelectionMode="Multiple" SelectionChanged="PlaylistView_SelectionChanged"/>
- </Grid>
+
+        <ListView Name="PlaylistView" ItemsSource = "{x:Bind PlaylistCollection }"  HorizontalAlignment="Left" Height="434" Margin="360,248,0,0" VerticalAlignment="Top" Width="775">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType = "local:MusicFile">
+                    <StackPanel Orientation = "Horizontal" Margin = "2">
+                        <Image Width="75" Source="{x:Bind McoverImage}"></Image>
+                        <TextBlock  Text = "{x:Bind MFileName}"  Margin = "2" />
+                        <TextBlock  Text="{x:Bind MArtist}" Margin = "2" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="Pause" FontFamily="Segoe MDL2 Assets" Content="&#xE769;" HorizontalAlignment="Left" Height="55" Margin="1201,231,0,0" VerticalAlignment="Top" Width="83" Click="Pause_Click"/>
+        <Button x:Name="PlayButton" FontFamily="Segoe MDL2 Assets" Content="&#xF5B0;" HorizontalAlignment="Left"  Margin="1201,164,0,0" VerticalAlignment="Top" Height="62" Width="95" Click="PlayButton_Click"/>
+    </Grid>
 </Page>
