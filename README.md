@@ -9,6 +9,7 @@ Things Done:
 -Discover Music Files and show as a collection.
 -Play/Pause Music discovered.
 -Create Playlists and Play the music.
+-C#,OOP,UWP,XAML
 
 Things to do:
 
