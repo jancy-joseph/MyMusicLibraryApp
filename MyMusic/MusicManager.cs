@@ -38,6 +38,18 @@ namespace MyMusic
             }
             return musiccollection;
        }
+        public static async Task<List<MusicFile>> GetMusicfromDictionary(ObservableCollection<MusicFile> MusicCollection)
+        {
+            MyMusicDictList.Clear();
+            List<MusicFile> musiccollection = await PickUsersMusicCollection();
+            //List<MusicFile> musiccollection = await LoadMyMusicCollection();
+            MusicCollection.Clear();
+            foreach (MusicFile mf in musiccollection)
+            {
+                MusicCollection.Add(mf);
+            }
+            return musiccollection;
+        }
 
 
         // <summary>

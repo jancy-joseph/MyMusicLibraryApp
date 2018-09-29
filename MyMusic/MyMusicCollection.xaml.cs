@@ -157,7 +157,7 @@ namespace MyMusic
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(MainPage));
         }
         /*
         private void MyViewList_ItemClick(object sender, ItemClickEventArgs e)
@@ -245,6 +245,7 @@ namespace MyMusic
                 }
                 Frame.Navigate(typeof(LibUserPlaylist), myplaylist);
             }
+            
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)

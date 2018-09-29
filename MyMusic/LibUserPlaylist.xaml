@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="0,20,0,-20">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/travel2.jpg" Opacity="0.8"/>
+        </Grid.Background>
         <TextBox Name="txtPlaylistName" HorizontalAlignment="Center" Margin="0,66,0,0" Text="TextBox" FontSize="36" VerticalAlignment="Top" Height="127" RenderTransformOrigin="-0.021,0.497" Width="391" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <TextBox.RenderTransform>
                 <CompositeTransform ScaleY="-1" ScaleX="-1" Rotation="-181.193" TranslateX="0.042" TranslateY="4.816"/>
@@ -28,5 +31,7 @@
         </ListView>
         <Button x:Name="Pause" FontFamily="Segoe MDL2 Assets" Content="&#xE769;" HorizontalAlignment="Left" Height="55" Margin="1201,231,0,0" VerticalAlignment="Top" Width="83" Click="Pause_Click"/>
         <Button x:Name="PlayButton" FontFamily="Segoe MDL2 Assets" Content="&#xF5B0;" HorizontalAlignment="Left"  Margin="1201,164,0,0" VerticalAlignment="Top" Height="62" Width="95" Click="PlayButton_Click"/>
+        <Button x:Name ="BackButton" FontFamily="Segoe MDL2 Assets" Content="&#xE112;" HorizontalAlignment="Left" Height="50" Margin="1385,10,0,0" VerticalAlignment="Top" Width="105" Click="Back_Click"/>
+
     </Grid>
 </Page>
