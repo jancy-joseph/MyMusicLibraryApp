@@ -1,6 +1,6 @@
 # MyMusicLibraryApp
 
-Developed a  Music Library using c#,uwp,xaml,OOP programming  as part of the Software Development - Deep stack program (student) assignment and scored -21/20( Extra Bonus for playing/pausing Music)
+Developed a  Music Library using c#,uwp,xaml,OOP programming  as part of the Software Development - Deep stack program (student) assignment
 
 
 Things Done:
